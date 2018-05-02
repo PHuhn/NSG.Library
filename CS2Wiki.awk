@@ -1,6 +1,9 @@
 BEGIN { nmSp=""; aFlg=0; sFlg=0; propFlg=0; pFlg=0; rFlg=0;
 }
 {
+ if( ($1 == "</member>" || $1 == "</param>" ) && NF ==1 ) {
+  next;
+ }
  if( aFlg == 1 ) {
   if( $1 == "</assembly>" ) {
    aFlg = 0;
@@ -12,23 +15,26 @@ BEGIN { nmSp=""; aFlg=0; sFlg=0; propFlg=0; pFlg=0; rFlg=0;
   aFlg = 1;
  }
  if( $1 == "<member" ) {
-  sFlg=0; pFlg=0;
-  split( $2, met, "\"" );
-  if( substr(met[2],1,2) == "T:" ) {
-   typeName( met[2] );
+  sFlg=0; pFlg=0; rFlg = 0;
+  met = getBetweenQuotes( $2, 1 );
+  if( substr(met,1,2) == "T:" ) {
+   typeName( met );
   }
-  if( substr(met[2],1,2) == "M:" ) {
-   methodName( met[2] );
+  if( substr(met,1,2) == "M:" ) {
+   methodName( met );
   }
-  if( substr(met[2],1,2) == "P:" ) {
-   propertyName( met[2] );
+  if( substr(met,1,2) == "P:" ) {
+   propertyName( met );
   }
  } else {
   if( $1 == "<summary>" ) { sFlg=1;
   } else {
    if( $1 == "</summary>" ) { sFlg=0;
    } else {
-    if( sFlg == 1 ) print $0;
+    if( sFlg == 1 ) {
+     sub(/^            /, ""); # rtrim
+     print $0;
+    }
     if( substr($1,1,9) == "<returns>" || rFlg == 1 ) {
      returnsName( $0 );
     }
@@ -46,10 +52,11 @@ function assemblyName( aStr ) {
  # <assembly>
  #  <name>NSG.Library.Logger</name>
  # </assembly>
- len = split( aStr, asm, ">" );
- aStr = asm[2];
- len = split( aStr, asm, "<" );
- printf( "= Assembly: %s =\n", asm[1] );
+ if( substr($1,1,6) == "<name>" ) {
+  asm = getBetweenTags( $0, "name" );
+  nmSp = asm;
+  printf( "= Assembly: %s =\n", asm );
+ }
 }
 #
 function typeName( tstr ) {
@@ -96,24 +103,12 @@ function paramName( pStr ) {
   printf( "\n==== Parameters ====\n" );
   pFlg = 1;
  }
- if( $1 == "</param>" ) {
-  return;
- }
  if( $1 == "<param" ) {
-  split( $0, pNam, "\"" );
-  printf( "===== %s =====\n", pNam[2] );
-  len = split( $0, ret, "\>" );
-  parStr = "";
-  for( i=2; i <= len; i++ ) {
-   if( ret[i] != "" ) {
-    if( i != len ) {
-     parStr = parStr ret[i] "\>";
-    } else {
-     parStr = parStr ret[i];
-    }
-   }
-  }
+  pNam = getBetweenQuotes( $0, 1 );
+  printf( "===== %s =====\n", pNam );
+  parStr = getBetweenTags( $0, "param" );
  } else {
+  sub(/^            /, ""); # rtrim
   parStr = $0;
  }
  idx = index( parStr, "</param>" );
@@ -139,17 +134,7 @@ function returnsName( rStr ) {
   return;
  }
  if( substr($1,1,9) == "<returns>" ) {
-  len = split( $0, ret, "\>" );
-  retStr = "";
-  for( i=2; i <= len; i++ ) {
-   if( ret[i] != "" ) {
-    if( i != len ) {
-     retStr = retStr ret[i] "\>";
-    } else {
-     retStr = retStr ret[i];
-    }
-   }
-  }
+  retStr = getBetweenTags( $0, "returns" );
  } else {
   retStr = $0;
  }
@@ -160,4 +145,34 @@ function returnsName( rStr ) {
  }
  print retStr;
 }
-#
+# - utilities ------
+# Between tags
+function getBetweenTags( inp, tagName ) {
+ betwn = inp;
+ sub(/^ +/, "", betwn); # rtrim
+ tag = "<" tagName;
+ if( substr(betwn,1,length(tag)) == tag ) {
+  pos = index( inp, ">" );
+  if( pos > 0 ) {
+   betwn = substr( inp, pos +1 );
+  }
+ }
+ # end tag
+ tag = "</" tagName ">";
+ pos = index( betwn, tag );
+ if( pos > 0 ) {
+  betwn = substr( betwn, 1, pos -1 );
+ }
+ return betwn;
+}
+# Between double quotes
+function getBetweenQuotes( inp, cnt ) {
+ betwn = "";
+ idx = cnt * 2;
+ len = split( inp, qts, "\"" );
+ if( len >= idx ) {
+  betwn = qts[ idx ];
+ }
+ return betwn;
+}
+# --- end-of-file ---
