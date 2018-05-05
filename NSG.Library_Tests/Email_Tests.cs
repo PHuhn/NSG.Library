@@ -6,7 +6,7 @@ using System.Net.Mail;
 using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-// using System.Net.Http.Headers;
+using System.Web.Script.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 //
 using SendGrid;
@@ -296,6 +296,16 @@ This is a test of the mail service.
             Assert.AreEqual(Encoding.Default.GetString(_textBuffer),
                 Encoding.Default.GetString(_actualContent));
             //
+        }
+        //
+        [TestMethod]
+        public void EMail_SendGrid_NewMailMessage_Deserialize_Test()
+        {
+            string sgEmail = "{\"contents\":[{\"value\":\"Hi\",\"type\":\"text/plain\"}],\"personalizations\":[{\"tos\":[{\"email\":\"abuse@internap.com\"}],\"ccs\":[],\"bccs\":[],\"subject\":\"Denial-of-service attack from 63.251.98.12\"}],\"from\":{\"email\":\"PhilHuhn@yahoo.com\",\"name\":\"Phil Huhn\"},\"subject\":\"Denial-of-service attack from 63.251.98.12\",\"plainTextContent\":\"\"}";
+            JavaScriptSerializer j = new JavaScriptSerializer();
+            SendGridMessage _sgm = (SendGridMessage)j.Deserialize(sgEmail, typeof(SendGridMessage));
+            IEMail _email = new EMail().NewMailMessage(_sgm);
+            Assert.AreEqual("Hi", ((MailMessage)_email.GetMailMessage()).Body);
         }
         //
         //  Support

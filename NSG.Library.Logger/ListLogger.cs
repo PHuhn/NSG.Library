@@ -61,7 +61,7 @@ namespace NSG.Library.Logger
         /// <returns>the id</returns>
         public long Log(LoggingLevel severity, string user, MethodBase method, string message, Exception exception = null)
         {
-            string _method = method.DeclaringType.FullName;
+            string _method = method.DeclaringType.FullName + "." + method.Name;
             string _exception = (exception == null ? "" : exception.ToString());
             return Log((byte)severity, user, _method, message, _exception);
         }
@@ -90,7 +90,7 @@ namespace NSG.Library.Logger
                 _log.Application = _application;
                 _log.Method = (method.Length > 255 ? method.Substring(0, 255) : method);
                 _log.LogLevel = severity;
-                _log.Level = _level.ToString();
+                _log.Level = _level.GetName();  // extension method in Helpers
                 _log.UserAccount = user;
                 _log.Message = (message.Length > 4000 ? message.Substring(0, 4000) : message);
                 _log.Exception = (exception.Length > 4000 ? exception.Substring(0, 4000) : exception);

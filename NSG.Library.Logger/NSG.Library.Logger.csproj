@@ -49,5 +49,11 @@
     <Compile Include="LogData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NSG.Library.Helpers\NSG.Library.Helpers.csproj">
+      <Project>{824450dc-66c8-474a-aff7-fd7adc1d684c}</Project>
+      <Name>NSG.Library.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

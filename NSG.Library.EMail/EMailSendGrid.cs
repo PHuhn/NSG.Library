@@ -95,7 +95,7 @@ namespace NSG.Library.EMail
         public IEMail NewMailMessage( SendGridMessage sgm )
         {
             //
-            var _mm = new MailMessage();
+            var _mailMessage = new MailMessage();
             //
             this.From( ConvertToMailAddress(sgm.From) );
             foreach( var per in sgm.Personalizations )
@@ -112,19 +112,26 @@ namespace NSG.Library.EMail
             this.Subject( sgm.Subject );
             if (string.IsNullOrEmpty(_mailMessage.Subject) && sgm.Personalizations.Count > 0)
                 this.Subject(sgm.Personalizations[0].Subject);
-            this.Body((string.IsNullOrEmpty(sgm.PlainTextContent) ? sgm.HtmlContent : sgm.PlainTextContent));
-            if( string.IsNullOrEmpty( _mailMessage.Body ) )
+            if (sgm.Contents != null && sgm.Contents.Count > 0)
             {
-                if (sgm.Contents.Count > 0)
-                {
-                    this.Body(sgm.Contents[0].Value);
-                    _mailMessage.IsBodyHtml = (sgm.Contents[0].Type.Contains("html") ? true : false);
-                }
+                this.Body(sgm.Contents[0].Value);
+                _mailMessage.IsBodyHtml = (sgm.Contents[0].Type.Contains("html") ? true : false);
             }
             else
-                _mailMessage.IsBodyHtml = (_mailMessage.Body.Substring(0, 1) == "<" ? true : false);
+            {
+                if ( !string.IsNullOrEmpty(sgm.PlainTextContent) )
+                {
+                    this.Body( sgm.PlainTextContent );
+                    _mailMessage.IsBodyHtml = false;
+                }
+                else
+                {
+                    this.Body( sgm.HtmlContent );
+                    _mailMessage.IsBodyHtml = true;
+                }
+            }
             //
-            if ( sgm.Attachments.Count > 0)
+            if (sgm.Attachments != null && sgm.Attachments.Count > 0)
             {
                 foreach (var _attachment in sgm.Attachments)
                 {

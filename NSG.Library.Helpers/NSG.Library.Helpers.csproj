@@ -46,6 +46,7 @@
     <Compile Include="Files.cs" />
     <Compile Include="OSCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
