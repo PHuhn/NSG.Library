@@ -51,6 +51,7 @@ namespace NSG.Library.Logger
         /// <summary>
         /// Create a 'to string'.
         /// </summary>
+        /// <returns>formatted string of the properties.</returns>
         string ToString();
     }
 }

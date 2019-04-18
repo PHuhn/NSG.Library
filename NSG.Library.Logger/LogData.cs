@@ -41,7 +41,7 @@ namespace NSG.Library.Logger
         [Range(typeof(byte), "0", "4", ErrorMessage = "'LogLevel' must be between 0 and 4")]
         public byte LogLevel { get; set; }
         /// <summary>
-        /// The human value of the above 'LogLevel'.
+        /// Level is the human readable value of the above 'LogLevel'.
         /// </summary>
         [Required(ErrorMessage = "Level is required."), MaxLength(8, ErrorMessage = "'Level' must be 8 or less characters.")]
         public string Level { get; set; }
@@ -56,14 +56,15 @@ namespace NSG.Library.Logger
         [Required(ErrorMessage = "Message is required."), MaxLength(4000, ErrorMessage = "'Message' must be 4000 or less characters.")]
         public string Message { get; set; }
         /// <summary>
-        /// The exception, including the stack trace.
+        /// The string value of the exception, including the stack trace.
         /// </summary>
         [MaxLength(4000, ErrorMessage = "'Exception' must be 4000 or less characters.")]
         public string Exception { get; set; }
         //
         /// <summary>
-        /// Create a 'to string'.
+        /// Formatted string value of the class properties.
         /// </summary>
+        /// <returns>Formatted string of the properties.</returns>
         public override string ToString()
         {
             //

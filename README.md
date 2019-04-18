@@ -64,8 +64,8 @@ Also, check the AppSetting in the app.config for various configuration setting.
 The Sandcastle project files for creating HTML compiled help files.
 
 ### Wiki
-The Wiki pages were initialy created by the CS2Wiki.awk scripts with the library's XML file.
-The AWK scripts is a hack and got me 70% of the way to creating the MediaWiki file.
+The Wiki pages were initialy created by the CS2Wiki.awk scripts with the library's XML file, and again regenerated with cs2media_wiki.py.
+The cs2media_wiki.py script got me 90% of the way to creating the MediaWiki file.
 Make sure the text is flush left except for code.
 
 Check the Wiki pages for more information:
@@ -73,3 +73,7 @@ Check the Wiki pages for more information:
 - [NSG.Library.Helpers](https://github.com/PHuhn/NSG.Library/wiki/NSG.Library.Helpers),
 - [NSG.Library.Logger](https://github.com/PHuhn/NSG.Library/wiki/NSG.Library.Logger),
 - [NSG.Library.EMail](https://github.com/PHuhn/NSG.Library/wiki/NSG.Library.EMail).
+
+Also see in another project:
+
+- [NSG.PrimeNG](https://github.com/PHuhn/NSG.PrimeNG/wiki).

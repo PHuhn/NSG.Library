@@ -53,9 +53,9 @@ namespace System
         /// <summary>
         /// Get an enumeration of the enum type
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">an enum type</typeparam>
         /// <param name="enumType">an enum type</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable of T</returns>
         public static IEnumerable<T> GetValues<T>(this Type enumType)
         {
             Type t = typeof(T);

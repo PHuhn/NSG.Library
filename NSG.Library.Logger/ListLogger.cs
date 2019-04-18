@@ -11,7 +11,7 @@ namespace NSG.Library.Logger
     /// <summary>
     /// The <see cref="NSG.Library.Logger"/> namespace contains classes
     /// for defining an interface for logging and a simple implementation
-    /// of the inferface.
+    /// of the interface.
     /// </summary>
     [System.Runtime.CompilerServices.CompilerGenerated]
     class NamespaceDoc

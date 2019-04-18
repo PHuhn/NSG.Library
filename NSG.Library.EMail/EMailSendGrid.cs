@@ -21,7 +21,7 @@ namespace NSG.Library.EMail
     {
         //
         /// <summary>
-        /// llamda method to move MailAddress email address to a 
+        /// lambda method to move MailAddress email address to a 
         /// new SendGrid EmailAddress address.
         /// </summary>
         /// <param name="address">a MailAddress email address</param>
@@ -29,7 +29,7 @@ namespace NSG.Library.EMail
         private EmailAddress ConvertToEmailAddress(MailAddress address) => new EmailAddress(address.Address, address.DisplayName);
         //
         /// <summary>
-        /// llamda method to move SendGrid EmailAddress email address to a 
+        /// lambda method to move SendGrid EmailAddress email address to a 
         /// new MS SMTP MailAddress address.
         /// </summary>
         /// <param name="address">a SendGrid EmailAddress email address</param>

@@ -520,7 +520,7 @@ namespace NSG.Library.EMail
         }
         //
         /// <summary>
-        /// retrurn the last few log messages...
+        /// return the last few log messages...
         /// </summary>
         /// <param name="lastCount">Count of last log records to return</param>
         /// <returns>list of strings</returns>

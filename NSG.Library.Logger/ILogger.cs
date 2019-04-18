@@ -19,7 +19,7 @@ namespace NSG.Library.Logger
         /// </summary>
         Audit = 0,
         /// <summary>
-        /// For exceptions an other errors
+        /// For exceptions and other errors
         /// </summary>
         Error = 1,
         /// <summary>
