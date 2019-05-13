@@ -19,6 +19,9 @@ namespace NSG.Library_Tests
             Debug = 4,
             Verbose = 5
         };
+        //
+        #region "enum methods"
+        //
         [TestMethod]
         public void Enum_GetName_Test()
         {
@@ -44,6 +47,37 @@ namespace NSG.Library_Tests
                 Console.WriteLine(String.Format("{0} - {1}", _e.Key, _e.Value));
             Assert.AreEqual(6, _dict.Count);
         }
+        //
+        #endregion // enum methods
+        //
+        #region "Exception"
+        //
+        [TestMethod]
+        public void Exception_ToLineFeedString01_Test()
+        {
+            string _actual = (new ApplicationException("Test")).ToLineFeedString();
+            Console.WriteLine(_actual);
+            Assert.AreEqual("Exception Date:", _actual.Substring(0,15));
+        }
+        //
+        [TestMethod]
+        public void Exception_ToLineFeedString02_Test()
+        {
+            int _a = 0;
+            try
+            {
+                var _fail = 23/_a;
+                Assert.Fail();
+            }
+            catch (Exception _ex)
+            {
+                string _actual = _ex.ToLineFeedString();
+                Console.WriteLine(_actual);
+                Assert.AreEqual("Exception Date:", _actual.Substring(0, 15));
+            }
+        }
+        //
+        #endregion
         //
     }
 }
