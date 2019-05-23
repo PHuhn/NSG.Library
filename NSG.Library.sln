@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.Library.EMail", "NSG.Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.Library_Tests", "NSG.Library_Tests\NSG.Library_Tests.csproj", "{2F2AA7CE-F086-4661-B889-9A7B9350A1D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.Library.Helpers.Config.Framework", "NSG.Library.Helpers.Config.Framework\NSG.Library.Helpers.Config.Framework.csproj", "{B6916468-D864-4C87-95F5-99ECBD232259}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2F2AA7CE-F086-4661-B889-9A7B9350A1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F2AA7CE-F086-4661-B889-9A7B9350A1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F2AA7CE-F086-4661-B889-9A7B9350A1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6916468-D864-4C87-95F5-99ECBD232259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6916468-D864-4C87-95F5-99ECBD232259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6916468-D864-4C87-95F5-99ECBD232259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6916468-D864-4C87-95F5-99ECBD232259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,7 @@
+Converting to .Net Core...
+
+How to port from .net framework to .net standard
+https://codehollow.com/2017/05/port-net-framework-net-standard/
+
+For Logger
+	Install-Package System.ComponentModel.Annotations -Version 4.5.0

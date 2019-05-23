@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSG.Library.Helpers.Config.NetStandard", "NSG.Library.Helpers.Config.NetStandard\NSG.Library.Helpers.Config.NetStandard.csproj", "{B27A8427-5669-45AE-A750-47E3C2CB7F00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSG.Library.Helpers_Config_NetStandard_Tests", "NSG.Library.Helpers_Config_NetStandard_Tests\NSG.Library.Helpers_Config_NetStandard_Tests.csproj", "{2DF922B9-4583-4E0F-834B-35762CB7DCAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B27A8427-5669-45AE-A750-47E3C2CB7F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27A8427-5669-45AE-A750-47E3C2CB7F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27A8427-5669-45AE-A750-47E3C2CB7F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27A8427-5669-45AE-A750-47E3C2CB7F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DF922B9-4583-4E0F-834B-35762CB7DCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DF922B9-4583-4E0F-834B-35762CB7DCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DF922B9-4583-4E0F-834B-35762CB7DCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DF922B9-4583-4E0F-834B-35762CB7DCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {651A0D2C-FF26-4D57-B5A4-69560D732500}
+	EndGlobalSection
+EndGlobal

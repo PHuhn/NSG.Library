@@ -1,0 +1,3 @@
+﻿To access the appsettings.json inport the following:
+
+	Install-Package Microsoft.Extensions.Configuration.Json

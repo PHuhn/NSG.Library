@@ -2,6 +2,9 @@
 ## Overview
 This solution contains three .Net projects as follows:
 - A collection of support helper library (NSG.Library.Helpers),
+- Application configuration helpers,
+  - (NSG.Library.Helpers.Config.Framework),
+  - (NSG.Library.Helpers.Config.NetStandard),
 - A simple in memory logging and logging interface (NSG.Library.Logger),
 - An e-mailing utility (NSG.Library.EMail).
 
@@ -9,9 +12,14 @@ This solution contains three .Net projects as follows:
 ### NSG.Library.Helpers
 NSG.Library.Helpers is a collection of support helper (static) methods.
 The helper methods are in three classes as follows:
-- App setting configuration retrieval,
 - Files and file system utilities,
 - Operation system (OS) command execution.
+
+### NSG.Library.Helpers.Config.Framework
+- App setting configuration retrieval.
+
+### NSG.Library.Helpers.Config.NetStandard
+- JSON configuration retrieval, separated into appsettings and appsecrets.
 
 ### NSG.Library.Logger
 NSG.Library.Logger is a simple in memory logging and logging interface.

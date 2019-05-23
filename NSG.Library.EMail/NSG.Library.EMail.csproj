@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NSG.Library.Helpers.Config.Framework\NSG.Library.Helpers.Config.Framework.csproj">
+      <Project>{b6916468-d864-4c87-95f5-99ecbd232259}</Project>
+      <Name>NSG.Library.Helpers.Config.Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NSG.Library.Helpers\NSG.Library.Helpers.csproj">
       <Project>{824450dc-66c8-474a-aff7-fd7adc1d684c}</Project>
       <Name>NSG.Library.Helpers</Name>

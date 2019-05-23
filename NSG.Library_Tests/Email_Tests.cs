@@ -6,7 +6,7 @@ using System.Net.Mail;
 using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 //
 using SendGrid;
@@ -302,10 +302,32 @@ This is a test of the mail service.
         public void EMail_SendGrid_NewMailMessage_Deserialize_Test()
         {
             string sgEmail = "{\"contents\":[{\"value\":\"Hi\",\"type\":\"text/plain\"}],\"personalizations\":[{\"tos\":[{\"email\":\"abuse@internap.com\"}],\"ccs\":[],\"bccs\":[],\"subject\":\"Denial-of-service attack from 63.251.98.12\"}],\"from\":{\"email\":\"PhilHuhn@yahoo.com\",\"name\":\"Phil Huhn\"},\"subject\":\"Denial-of-service attack from 63.251.98.12\",\"plainTextContent\":\"\"}";
-            JavaScriptSerializer j = new JavaScriptSerializer();
-            SendGridMessage _sgm = (SendGridMessage)j.Deserialize(sgEmail, typeof(SendGridMessage));
+            SendGridMessage _sgm = JsonConvert.DeserializeObject<SendGridMessage>(sgEmail);
             IEMail _email = new EMail().NewMailMessage(_sgm);
             Assert.AreEqual("Hi", ((MailMessage)_email.GetMailMessage()).Body);
+        }
+        //
+        [TestMethod]
+        public void EMail_GMail_NewMailMessage_Test()
+        {
+            string _fromAddress = "Phil.N.Huhn@gmail.com";
+            IEMail _mail = new EMail().From(_fromAddress, "Phil N. Huhn").To("PhilHuhn@yahoo.com")
+                .Subject("Test Message from Yourself").Body("This is a test Message from yourself. Phil");
+            try
+            {
+                using (var _client = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    _client.EnableSsl = false;
+                    _client.Credentials = new System.Net.NetworkCredential(_fromAddress, "p@ssW0rd8");
+                    _client.Send(_mail.GetMailMessage());
+                }
+            }
+            catch (Exception _ex)
+            {
+                System.Diagnostics.Debug.WriteLine(_ex.Message);
+                var _exp = _ex.GetBaseException();
+                System.Diagnostics.Debug.WriteLine(_exp.Message);
+            }
         }
         //
         //  Support
