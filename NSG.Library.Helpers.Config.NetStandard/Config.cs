@@ -1,5 +1,6 @@
 ﻿//
 using System;
+using System.IO;
 using Microsoft.Extensions.Configuration;
 //
 // https://stackoverflow.com/questions/1469764/run-command-prompt-commands
@@ -40,6 +41,13 @@ namespace NSG.Library.Helpers
         /// <returns>IConfiguration</returns>
         public static IConfiguration SetAppConfiguration(string appSettings, string appSecrets)
         {
+            if (appSettings != "")
+                if (!File.Exists(appSettings))
+                    throw new FileNotFoundException($"Settings file: {appSettings} not found.");
+            if (appSecrets != "")
+                if (!File.Exists(appSecrets))
+                    throw new FileNotFoundException($"Secrets file: {appSecrets} not found.");
+            //
             config = new ConfigurationBuilder()
                 .AddJsonFile(appSettings, optional: true, reloadOnChange: false)
                 .AddJsonFile(appSecrets, optional: true, reloadOnChange: false)
@@ -66,7 +74,7 @@ namespace NSG.Library.Helpers
                     _value = config.GetSection(keys[0])[keys[1]].ToString();
                 }
                 else
-                    _value = config.GetSection(keys[0]).ToString();
+                    _value = config.GetValue<string>(configAppKey);
             }
             catch (Exception _ex)
             {

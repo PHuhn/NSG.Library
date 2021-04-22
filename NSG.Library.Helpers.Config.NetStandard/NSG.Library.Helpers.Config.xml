@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NSG.Library.Helpers.Config</name>
+    </assembly>
+    <members>
+        <member name="T:NSG.Library.Helpers.NamespaceDoc">
+            <summary>
+            The <see cref="N:NSG.Library.Helpers"/> namespace contains a
+            collection of static helper methods.
+            </summary>
+        </member>
+        <member name="T:NSG.Library.Helpers.Config">
+            <summary>
+            Static helpers for handling AppSettings configuration.
+            </summary>
+        </member>
+        <member name="F:NSG.Library.Helpers.Config.config">
+            <summary>
+            The private hidden i-configuration for the singleton pattern.
+            </summary>
+        </member>
+        <member name="P:NSG.Library.Helpers.Config.GetAppConfiguration">
+            <summary>
+            The public i-configuration getter for the singleton pattern.
+            </summary>
+            <value>IConfiguration</value>
+        </member>
+        <member name="M:NSG.Library.Helpers.Config.SetAppConfiguration(System.String,System.String)">
+            <summary>
+            Create and establish 
+            </summary>
+            <param name="appSettings">The JSON file name for general configuration.</param>
+            <param name="appSecrets">The JSON file name for secret information configuration.</param>
+            <returns>IConfiguration</returns>
+        </member>
+        <member name="M:NSG.Library.Helpers.Config.GetStringAppSettingConfigValue(System.String,System.String)">
+            <summary>
+            Get a value from the AppSetting section of the web config.
+            </summary>
+            <param name="configAppKey">AppSetting key value</param>
+            <param name="defaultValue">if not found return this value</param>
+            <returns>string of the value in the appSetting section in the config file.</returns>
+        </member>
+        <member name="M:NSG.Library.Helpers.Config.GetBoolAppSettingConfigValue(System.String,System.Boolean)">
+            <summary>
+            Get a value from the AppSetting section of the web config.
+            </summary>
+            <param name="configAppKey">AppSetting key value</param>
+            <param name="defaultValue">if not found return this boolean value</param>
+            <returns>boolean value in the appSetting section in the config file.</returns>
+        </member>
+        <member name="M:NSG.Library.Helpers.Config.GetIntAppSettingConfigValue(System.String,System.Int32)">
+            <summary>
+            Get a value from the AppSetting section of the web config.
+            </summary>
+            <param name="configAppKey">AppSetting key value</param>
+            <param name="defaultValue">if not found return this integer value</param>
+            <returns>integer value in the appSetting section in the config file.</returns>
+        </member>
+    </members>
+</doc>
