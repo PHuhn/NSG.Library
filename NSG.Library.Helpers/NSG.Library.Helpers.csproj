@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NSG.Library.Helpers</RootNamespace>
     <AssemblyName>NSG.Library.Helpers</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -47,12 +47,6 @@
     <Compile Include="OSCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NSG.Library.Helpers.Config.Framework\NSG.Library.Helpers.Config.Framework.csproj">
-      <Project>{b6916468-d864-4c87-95f5-99ecbd232259}</Project>
-      <Name>NSG.Library.Helpers.Config.Framework</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
