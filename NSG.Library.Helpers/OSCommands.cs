@@ -20,8 +20,9 @@ namespace NSG.Library.Helpers
         /// </summary>
         /// <param name="cmdStr">The command string to execute in the operating system.</param>
         /// <param name="workingDirectory">The base directory to start the OS command.</param>
+        /// <param name="timeOut">How many millisecond to wait. -1 is infinite timeout.</param>
         /// <returns>String of the output of the command.</returns>
-        public static string CallOperatingSystemCmd(string cmdStr, string workingDirectory)
+        public static string CallOperatingSystemCmd(string cmdStr, string workingDirectory, int timeOut)
         {
             string _return = "";
             if (cmdStr != "")
@@ -39,7 +40,7 @@ namespace NSG.Library.Helpers
                 _cmd.Start();
                 _cmd.StandardInput.Flush();
                 _cmd.StandardInput.Close();
-                _cmd.WaitForExit();
+                _cmd.WaitForExit(timeOut); // # of milliseconds
                 _return = _cmd.StandardOutput.ReadToEnd();
             }
             return _return;
