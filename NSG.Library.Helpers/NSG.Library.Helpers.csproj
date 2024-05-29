@@ -6,8 +6,8 @@
     <AssemblyTitle>NSG.Library.Helpers</AssemblyTitle>
     <Product>NSG.Library.Helpers</Product>
     <Copyright>Copyright ©  2024</Copyright>
-    <AssemblyVersion>1.0.3.22</AssemblyVersion>
-    <FileVersion>1.0.3.22</FileVersion>
+    <AssemblyVersion>1.0.3.23</AssemblyVersion>
+    <FileVersion>1.0.3.23</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>bin\Debug\NSG.Library.Helpers.xml</DocumentationFile>

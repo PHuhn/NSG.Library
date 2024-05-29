@@ -16,7 +16,8 @@ namespace NSG.Library_Tests
         {
             // string CallOperatingSystemCmd(string cmdStr, string workingDirectory)
             // create file...
-            byte[] _buffer = new byte[] { 239, 187, 191, 49, 10, 50, 10, 51, 10 };
+            byte[] _buffer = new byte[] { 49, 10, 50, 10, 51, 10 };
+            string _expected = $"1\r\n2\r\n3\r\n\r\n";
             string _fileName = @".\123.txt";
             string _cmd = @"TYPE " + _fileName;
             Console.WriteLine(_fileName);
@@ -24,7 +25,11 @@ namespace NSG.Library_Tests
             Assert.IsTrue(File.Exists(_fileName));
             string _output = OS.CallOperatingSystemCmd(_cmd, ".", -1);
             Console.WriteLine(_output);
-            Assert.AreEqual("1\n2\n3\n", _output);
+            Console.WriteLine(string.Join("",
+                _expected.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));
+            Console.WriteLine(string.Join("",
+                _output.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));
+            Assert.AreEqual(_expected, _output);
         }
         //
         [TestMethod]
@@ -34,9 +39,24 @@ namespace NSG.Library_Tests
             // create file...
             string _fileName = @".\App_Data\TextFile.txt";
             string _cmd = @"find ""xyz"" " + _fileName;
-            string _expected = $"\r\n---------- .\\APP_DATA\\TEXTFILE.TXT\r\n";
+            string _expected = $"\r\n---------- .\\APP_DATA\\TEXTFILE.TXT\r\n\r\n";
             Assert.IsTrue(File.Exists(_fileName));
             string _output = OS.CallOperatingSystemCmd(_cmd, ".", 10000);
+            Console.WriteLine(_output);
+            Console.WriteLine(string.Join("",
+                _expected.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));
+            Console.WriteLine(string.Join("",
+                _output.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));
+            Assert.AreEqual(_expected, _output);
+        }
+        //
+        [TestMethod]
+        public void Helpers_OSCommands_CallOperatingSystemTimeOutCmd_Test()
+        {
+            // string CallOperatingSystemCmd(string cmdStr, string workingDirectory, int timeOut)
+            string _cmd = @"ping 127.0.0.1 -n 19 > nul";
+            string _expected = $"";
+            string _output = OS.CallOperatingSystemCmd(_cmd, ".", 2000);
             Console.WriteLine(_output);
             Console.WriteLine(string.Join("",
                 _expected.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));

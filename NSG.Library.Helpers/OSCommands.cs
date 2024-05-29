@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Configuration;
+using System.Diagnostics;
+using System.Threading;
+using System.IO;
+using System.Text;
 //
 // https://stackoverflow.com/questions/1469764/run-command-prompt-commands
 //
@@ -24,26 +28,48 @@ namespace NSG.Library.Helpers
         /// <returns>String of the output of the command.</returns>
         public static string CallOperatingSystemCmd(string cmdStr, string workingDirectory, int timeOut)
         {
-            string _return = "";
+            var _return = new StringBuilder();
+            var _error = new StringBuilder();
             if (cmdStr != "")
             {
-                System.Diagnostics.Process _cmd = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo _startInfo = new System.Diagnostics.ProcessStartInfo();
                 _startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 _startInfo.FileName = "cmd.exe";
                 _startInfo.WorkingDirectory = workingDirectory;
                 _startInfo.RedirectStandardInput = true;
+                _startInfo.RedirectStandardError = true;
                 _startInfo.RedirectStandardOutput = true;
                 _startInfo.UseShellExecute = false;
                 _startInfo.Arguments = "/c " + cmdStr;
-                _cmd.StartInfo = _startInfo;
-                _cmd.Start();
-                _cmd.StandardInput.Flush();
-                _cmd.StandardInput.Close();
-                _cmd.WaitForExit(timeOut); // # of milliseconds
-                _return = _cmd.StandardOutput.ReadToEnd();
+                using (Process _cmd = new Process())
+                {
+                    _cmd.StartInfo = _startInfo;
+                    _cmd.EnableRaisingEvents = true;
+                    _cmd.OutputDataReceived += new DataReceivedEventHandler((s, e) =>
+                    {
+                        _return.AppendLine(e.Data);
+                    });
+                    _cmd.ErrorDataReceived += new DataReceivedEventHandler((s, e) =>
+                    {
+                        _error.AppendLine(e.Data);
+                    });
+                    _cmd.Start();
+                    _cmd.BeginOutputReadLine();
+                    _cmd.BeginErrorReadLine();
+                    if (!_cmd.WaitForExit(timeOut)) // # of milliseconds
+                    {
+                        Console.WriteLine($"Command timed out: {cmdStr} after {timeOut} milliseconds.");
+                        _cmd.Kill();
+                    }
+                    _cmd.Close();
+                }
             }
-            return _return;
+            if( !string.IsNullOrEmpty(_error.ToString().Replace($"\r", "").Replace($"\n", "")))
+            {
+                _return.AppendLine("-- error ---");
+                _return.Append(_error.ToString());
+            }
+            return _return.ToString();
         }
     }
 }

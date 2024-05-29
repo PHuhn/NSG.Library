@@ -5,8 +5,8 @@
     <AssemblyTitle>NSG.Library_Tests</AssemblyTitle>
     <Product>NSG.Library_Tests</Product>
     <Copyright>Copyright ©  2024</Copyright>
-    <AssemblyVersion>1.0.2.18</AssemblyVersion>
-    <FileVersion>1.0.2.18</FileVersion>
+    <AssemblyVersion>1.0.3.23</AssemblyVersion>
+    <FileVersion>1.0.3.23</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="App_Data\GoodPdf.pdf">
