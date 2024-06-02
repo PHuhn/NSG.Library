@@ -30,7 +30,7 @@ namespace NSG.Library.Helpers
         {
             var _return = new StringBuilder();
             var _error = new StringBuilder();
-            if (cmdStr != "")
+            if ( !string.IsNullOrEmpty( cmdStr ) )
             {
                 System.Diagnostics.ProcessStartInfo _startInfo = new System.Diagnostics.ProcessStartInfo();
                 _startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -58,7 +58,7 @@ namespace NSG.Library.Helpers
                     _cmd.BeginErrorReadLine();
                     if (!_cmd.WaitForExit(timeOut)) // # of milliseconds
                     {
-                        Console.WriteLine($"Command timed out: {cmdStr} after {timeOut} milliseconds.");
+                        Console.WriteLine($"Command: {cmdStr} timed out after {timeOut} milliseconds.");
                         _cmd.Kill();
                     }
                     _cmd.Close();

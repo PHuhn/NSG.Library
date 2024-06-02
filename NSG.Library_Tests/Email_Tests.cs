@@ -55,8 +55,10 @@ namespace NSG.Library_Tests
             _mail.SendSmtp();
             //
             List<string> _errors = _mail.Logs(5);
-            if (_errors.Count > 0)
-                Console.WriteLine(_errors[0]);
+            for (int _i = 0; _i < _errors.Count; _i++)
+            {
+                Console.WriteLine(_errors[_i]);
+            }
             Assert.AreEqual(0, _errors.Count);
             List<string> _emails = _mail.Emails();
             if (_emails.Count > 0)
@@ -162,16 +164,18 @@ namespace NSG.Library_Tests
         [TestMethod]
         public void EMail_SendGrid_Basic_Test()
         {
-            //
+            // given
             string _apiKey = ConfigurationManager.AppSettings["Email:ApiKey"].ToString();
             //
             IEMail _mail = EMail_CreateTestMessage();
-            //
+            // when
             _mail.SendSendGridAsync(_apiKey);
-            //
+            // then
             List<string> _errors = _mail.Logs(5);
-            if (_errors.Count > 0)
-                Console.WriteLine(_errors[0]);
+            for (int _i = 0; _i < _errors.Count; _i++)
+            {
+                Console.WriteLine(_errors[_i]);
+            }
             Assert.AreEqual(0, _errors.Count);
             List<string> _emails = _mail.Emails();
             if (_emails.Count > 0)
@@ -301,7 +305,7 @@ This is a test of the mail service.
         [TestMethod]
         public void EMail_SendGrid_NewMailMessage_Deserialize_Test()
         {
-            string sgEmail = "{\"contents\":[{\"value\":\"Hi\",\"type\":\"text/plain\"}],\"personalizations\":[{\"tos\":[{\"email\":\"abuse@internap.com\"}],\"ccs\":[],\"bccs\":[],\"subject\":\"Denial-of-service attack from 63.251.98.12\"}],\"from\":{\"email\":\"PhilHuhn@yahoo.com\",\"name\":\"Phil Huhn\"},\"subject\":\"Denial-of-service attack from 63.251.98.12\",\"plainTextContent\":\"\"}";
+            string sgEmail = "{\"content\":[{\"value\":\"Hi\",\"type\":\"text/plain\"}],\"personalizations\":[{\"to\":[{\"email\":\"abuse@amazonaws.com\"}],\"subject\":\"Test Email\"}],\"from\":{\"email\":\"Phil@yahoo.com\",\"name\":\"Phil\"},\"subject\":\"Test Email\"}";
             SendGridMessage _sgm = JsonConvert.DeserializeObject<SendGridMessage>(sgEmail);
             IEMail _email = new EMail().NewMailMessage(_sgm);
             Assert.AreEqual("Hi", ((MailMessage)_email.GetMailMessage()).Body);
@@ -328,6 +332,14 @@ This is a test of the mail service.
                 var _exp = _ex.GetBaseException();
                 System.Diagnostics.Debug.WriteLine(_exp.Message);
             }
+        }
+        //
+        [TestMethod]
+        public void ConfigurationManager_AppSettings_Exists_Test()
+        {
+            var _appSettings = System.Configuration.ConfigurationManager.AppSettings;
+            string _apiKey = System.Configuration.ConfigurationManager.AppSettings["Email:ApiKey"].ToString();
+            Assert.AreEqual("SG.11111111111", _apiKey);
         }
         //
         //  Support

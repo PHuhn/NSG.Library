@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyTitle>NSG.Library_Tests</AssemblyTitle>
     <Product>NSG.Library_Tests</Product>
     <Copyright>Copyright ©  2024</Copyright>
-    <AssemblyVersion>1.0.3.23</AssemblyVersion>
-    <FileVersion>1.0.3.23</FileVersion>
+    <AssemblyVersion>1.0.3.24</AssemblyVersion>
+    <FileVersion>1.0.3.24</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="App_Data\GoodPdf.pdf">
@@ -34,5 +34,10 @@
     <PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

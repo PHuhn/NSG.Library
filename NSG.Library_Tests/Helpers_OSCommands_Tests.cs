@@ -1,4 +1,6 @@
-﻿using System;
+﻿// ===========================================================================
+// File: Helper_OSCommands_Tests
+using System;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -63,6 +65,21 @@ namespace NSG.Library_Tests
             Assert.AreEqual(_expected, _output);
         }
         //
+        [TestMethod]
+        public void Helpers_OSCommands_CallOperatingSystemErrorCmd_Test()
+        {
+            // string CallOperatingSystemCmd(string cmdStr, string workingDirectory, int timeOut)
+            string _cmd = @"xxyyzx";
+            string _expected = $"\r\n-- error ---\r\n'xxyyzx' is not recognized as an internal or external command,\r\noperable program or batch file.\r\n\r\n";
+            string _output = OS.CallOperatingSystemCmd(_cmd, ".", 2000);
+            Console.WriteLine(_output);
+            Console.WriteLine(string.Join("",
+                _expected.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));
+            Console.WriteLine(string.Join("",
+                _output.Select(c => String.Format(" {0:X2}", Convert.ToInt32(c)))));
+            Assert.AreEqual(_expected, _output);
+        }
+        //
     }
 }
-//
+// ===========================================================================

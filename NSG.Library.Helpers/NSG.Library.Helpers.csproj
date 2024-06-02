@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyTitle>NSG.Library.Helpers</AssemblyTitle>
     <Product>NSG.Library.Helpers</Product>
     <Copyright>Copyright ©  2024</Copyright>
-    <AssemblyVersion>1.0.3.23</AssemblyVersion>
-    <FileVersion>1.0.3.23</FileVersion>
+    <AssemblyVersion>1.0.3.24</AssemblyVersion>
+    <FileVersion>1.0.3.24</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>bin\Debug\NSG.Library.Helpers.xml</DocumentationFile>
